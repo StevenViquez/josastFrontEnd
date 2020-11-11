@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row align-items-center my-5"></div>
+  <div class="row align-items-center my-5">
+    <div class="col-sm-12">
+      <ul class="nav nav-tabs nav-pills">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/usuario/login']"
+            routerLinkActive="active"
+            >Login</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/usuario/registrar']"
+            routerLinkActive="active"
+            >Registrarse</a
+          >
+        </li>
+      </ul>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
