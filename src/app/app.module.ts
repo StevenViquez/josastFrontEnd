@@ -9,6 +9,7 @@ import { ShareModule } from './share/share.module';
 import { HomeModule } from './home/home.module';
 import { UserModule } from './user/user.module';
 import { HttpErrorInterceptorService } from './share/http-error-interceptor.service';
+import { ProductModule } from './product/product.module';
 
 @NgModule({
   declarations: [
@@ -27,8 +28,10 @@ import { HttpErrorInterceptorService } from './share/http-error-interceptor.serv
     // después los demás módulos
     HomeModule,
     UserModule,
+    ProductModule,
     // al final el gestor de las rutas principal
     AppRoutingModule,
+    ProductModule,
   ],
   providers: [
     {

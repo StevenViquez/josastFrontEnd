@@ -1,0 +1,32 @@
+<div class="container margen">
+  <div class="row my-4">
+    <div class="col" *ngIf="datos?.id">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-6 shadow-sm h-md-250 ">
+        <div class="col p-4 d-flex flex-column position-static"><img src="{{ datos.url_picture }}" alt="Foto {{ datos.nombreImagen }"
+            class="img-thumbnail rounded float-left" /></div>
+        <div class="col p-4 d-flex flex-column position-static">
+
+          <h3 class="mb-0 text-primary">{{ datos.name }}</h3>
+          <div class="mb-1">
+            <b>Marca:
+            </b> {{ datos.productbrand.description }}
+          </div>
+          <p class="card-text"><b>Descripción: </b>{{ datos.description }}</p>
+          <h4>{{ datos.cost | currency: '₡'}}</h4>
+          <div class="card-text">
+            <b>Características del producto: </b>
+            <ul>
+              <li *ngFor="let item of datos.productfeatures">
+                {{item.description}}
+              </li>
+            </ul>
+          </div>
+          <p class="card-text mb-auto">
+            <b>Clasificación: {{datos.productclassification.description}}</b>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
