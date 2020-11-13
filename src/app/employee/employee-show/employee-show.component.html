@@ -1,0 +1,46 @@
+<div class="container margen">
+  <div class="row my-4">
+    <div class="col" *ngIf="datos?.id">
+      <div
+        class="row no-gutters border rounded overflow-hidden flex-md-row mb-6 shadow-sm h-md-250"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <img
+            src="/assets/images/logo.png"
+            alt="Foto {{ datos.nombreImagen }"
+            class="img-thumbnail rounded float-left"
+          />
+
+        </div>
+        <div class="fixed-bottom">
+          <a class="btn btn-outline-warning" href="employee/all" role="button"><b><< Ver empleados</b></a>
+        </div>
+
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0 text-primary">
+            {{ datos.name }} {{ datos.second_name }}
+          </h3>
+          <div class="mb-1">
+            <b>Número Teléfonico: </b> {{ datos.phone_number }}
+          </div>
+          <p class="card-text">
+            <b>Posición: </b>{{ datos.employeeposition.description }}
+          </p>
+          <div class="card-text">
+            <b>Vehiculo: </b>
+            <ul class="list-group">
+              <li class="list-group-item"> Marca: {{ datos.vehicle.vehiclebrand.description }}</li>
+              <li class="list-group-item">Año: {{ datos.vehicle.year }}</li>
+              <li class="list-group-item">Tipo: {{ datos.vehicle.vehicletype.description }}</li>
+              <li class="list-group-item">Placa: {{ datos.vehicle.license_plate }}</li>
+            </ul>
+          </div>
+          <p class="card-text mb-auto">
+            <b>Fecha de contratación: {{ datos.hired_date }}</b>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

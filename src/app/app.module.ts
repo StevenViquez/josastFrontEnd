@@ -10,6 +10,7 @@ import { HomeModule } from './home/home.module';
 import { UserModule } from './user/user.module';
 import { HttpErrorInterceptorService } from './share/http-error-interceptor.service';
 import { ProductModule } from './product/product.module';
+import { EmployeeModule } from './employee/employee.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ProductModule } from './product/product.module';
     HomeModule,
     UserModule,
     ProductModule,
+    EmployeeModule,
     // al final el gestor de las rutas principal
     AppRoutingModule,
     ProductModule,

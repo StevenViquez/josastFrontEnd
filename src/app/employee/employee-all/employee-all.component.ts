@@ -1,34 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { GenericService } from 'src/app/share/generic.service';
 
 @Component({
-  selector: 'app-product-show',
-  templateUrl: './product-show.component.html',
-  styleUrls: ['./product-show.component.css']
+  selector: 'app-employee-all',
+  templateUrl: './employee-all.component.html',
+  styleUrls: ['./employee-all.component.css']
 })
-export class ProductShowComponent implements OnInit {
+export class EmployeeAllComponent implements OnInit {
   datos: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(
-    private gService: GenericService,
-    private route: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute,
+    private gService: GenericService
   ) { }
 
   ngOnInit(): void {
-    //Obtener el id del videojuego
-    let id = +this.route.snapshot.paramMap.get('id');
-    //Obtener el videojuego
-    this.getProduct(id);
+    this.listEmployee();
   }
-  getProduct(id: any) {
+  listEmployee() {
     this.gService
-      .get('product', id)
+      .list('employee/all')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-        // console.log(data);
         this.datos = data;
       });
   }
@@ -38,4 +35,3 @@ export class ProductShowComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
 }
-

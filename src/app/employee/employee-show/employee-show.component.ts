@@ -5,11 +5,11 @@ import { takeUntil } from 'rxjs/operators';
 import { GenericService } from 'src/app/share/generic.service';
 
 @Component({
-  selector: 'app-product-show',
-  templateUrl: './product-show.component.html',
-  styleUrls: ['./product-show.component.css']
+  selector: 'app-employee-show',
+  templateUrl: './employee-show.component.html',
+  styleUrls: ['./employee-show.component.css']
 })
-export class ProductShowComponent implements OnInit {
+export class EmployeeShowComponent implements OnInit {
   datos: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(
@@ -21,11 +21,11 @@ export class ProductShowComponent implements OnInit {
     //Obtener el id del videojuego
     let id = +this.route.snapshot.paramMap.get('id');
     //Obtener el videojuego
-    this.getProduct(id);
+    this.getEmployee(id);
   }
-  getProduct(id: any) {
+  getEmployee(id: any) {
     this.gService
-      .get('product', id)
+      .get('employee', id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         // console.log(data);
@@ -38,4 +38,3 @@ export class ProductShowComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
 }
-
