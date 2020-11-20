@@ -63,7 +63,7 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
             changeError = true;
             break;
           case 403:
-            message = 'Recurso no encontrado';
+            message = 'Sin permiso para el acceso';
             changeError = true;
             break;
           case 422:
