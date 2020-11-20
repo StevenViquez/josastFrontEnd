@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { GenericService } from 'src/app/share/generic.service';
 import { NotificacionService } from 'src/app/share/notification.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-create',
@@ -18,6 +19,8 @@ import { NotificacionService } from 'src/app/share/notification.service';
 })
 export class ProductCreateComponent implements OnInit {
   product: any;
+  productclassification: any;
+  productbrand:any;
   imageURL: string;
   generosList: any;
   error: any;
@@ -39,11 +42,15 @@ export class ProductCreateComponent implements OnInit {
       description: ['', [Validators.required]],
       cost: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       is_enabled: ['', [Validators.required]],
+      productclassification_id:['', [Validators.required]],
+      productbrand_id:['', [Validators.required]],
       product_features: this.fb.array([]),
       product_feature_id: this.fb.array([]),
       image: [''],
     });
     this.getgeneros();
+    this.getproductclassification();
+    this.getproductbrand();
   }
 
 
@@ -155,6 +162,23 @@ export class ProductCreateComponent implements OnInit {
     );
   };
 
+  getproductclassification() {
+    this.gService
+      .list('product-classification')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.productclassification = data;
+      });
+  }
+
+  getproductbrand() {
+    this.gService
+      .list('product-brand')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.productbrand = data;
+      });
+  }
 
 }
 

@@ -34,4 +34,19 @@ export class ProductAllComponent implements OnInit {
     // Desinscribirse
     this.destroy$.unsubscribe();
   }
+
+  createProduct() {
+    this.router.navigate(['../create'], {
+      relativeTo: this.route,
+    });
+  }
+
+  updateProduct(id: number) {
+    this.router.navigate(['../update', id], {
+      relativeTo: this.route,
+    });
+  }
+
 }
+
+

@@ -90,8 +90,33 @@
 
 
             <!-- Falta enviar productclassification y productbrand. Se debe aplicar la misma logica de roles-->
+            <div class="form-group">
+              <label for="productclassification">Clasificación de producto</label>
+              <select class="form-control" formControlName="productclassification_id">
+                <option *ngFor="let x of productclassification" [value]="x.id">
+                  {{x.description}}
+                </option>
+              </select>
+              <div class="col-sm-4">
+                <small *ngIf="errorHandling('productclassification_id', 'required')" class="text-danger">
+                  La clasificación del producto es requerida
+                </small>
+              </div>
+            </div>
 
-
+            <div class="form-group">
+              <label for="productbrand">Marca de producto</label>
+              <select class="form-control" formControlName="productbrand_id">
+                <option *ngFor="let x of productbrand" [value]="x.id">
+                  {{x.description}}
+                </option>
+              </select>
+              <div class="col-sm-4">
+                <small *ngIf="errorHandling('productbrand_id', 'required')" class="text-danger">
+                  La marca del producto es requerida
+                </small>
+              </div>
+            </div>
 
 
             <div class="col-md-6 mb-3">

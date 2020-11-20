@@ -1,7 +1,7 @@
 <div class="row justify-content-center margen">
   <div class="col-md-10">
     <h4 class="mb-3">Lista de productos</h4>
-    <button type="button" class="btn btn-primary btn-sm">
+    <button type="button" class="btn btn-primary btn-sm" (click)="createProduct()">
       <i class="fas fa-plus"></i>
     </button>
     <table class="table table-hover">
@@ -23,7 +23,7 @@
              <input type="image" src="{{item.url_picture}}" id="ImagenProducto" style="height:75px;width:75px">
           </td>
           <td>
-            <button type="button" class="btn btn-primary btn-sm">
+            <button type="button" class="btn btn-primary btn-sm" (click)="updateProduct(item.id)">
               <i class="fas fa-pencil-alt"></i>
             </button>
           </td>
