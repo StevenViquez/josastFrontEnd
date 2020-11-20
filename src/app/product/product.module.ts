@@ -7,13 +7,15 @@ import { ProductIndexComponent } from './product-index/product-index.component';
 import { ProductShowComponent } from './product-show/product-show.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductUpdateComponent } from './product-update/product-update.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [ProductIndexComponent, ProductAllComponent, ProductShowComponent, ProductCreateComponent, ProductUpdateComponent],
   imports: [
     CommonModule,
-    ProductRoutingModule
+    ProductRoutingModule,
+    ReactiveFormsModule,
   ]
 })
 export class ProductModule { }

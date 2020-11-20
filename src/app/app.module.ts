@@ -33,7 +33,6 @@ import { EmployeeModule } from './employee/employee.module';
     EmployeeModule,
     // al final el gestor de las rutas principal
     AppRoutingModule,
-    ProductModule,
   ],
   providers: [
     {
