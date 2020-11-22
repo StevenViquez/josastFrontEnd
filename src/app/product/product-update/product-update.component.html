@@ -1,1 +1,161 @@
+<div class="row justify-content-center margen" id="main">
+  <div class="col-11">
+    <h4 class="mb-3">Actualizar producto</h4>
+    <ng-template #loading>
+      <img class="img-fluid rounded mx-auto d-block" src="/assets/images/loading.gif" alt="Cargando..."
+        style="width: 300px;" />
+    </ng-template>
+    <ng-template [ngIf]="product" [ngIfElse]="loading">
+      <form [formGroup]="formUpdate" (ngSubmit)="submitForm()" novalidate>
 
+        <div class="row justify-content-center margen">
+          <!--Formulario información-->
+          <div class="col-md-6">
+            <!-- Identificador del videojuego -->
+            <input type="hidden" formControlName="id" />
+
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="name">Nombre </label>
+              <div class="col-sm-8">
+                <input type="text" class="formControl" formControlName="name" placeholder="Nombre producto" />
+              </div>
+              <div class="col-auto">
+                <small *ngIf="errorHandling('name', 'required')" class="text-danger">
+                  El nombre del producto es requerida
+                </small>
+              </div>
+            </div>
+
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="description">Descripción </label>
+              <div class="col-sm-8">
+                <input type="text" class="formControl" formControlName="description" />
+              </div>
+              <div class="col-sm-4">
+                <small *ngIf="errorHandling('description', 'required')" class="text-danger">
+                  La descripción del producto es requerida
+                </small>
+              </div>
+            </div>
+
+
+
+
+
+            <div class="form-group row">
+              <label for="cost" class="col-sm-4 col-form-label">Precio</label>
+              <div class="col-sm-8">
+                <input type="text" class="formControl" formControlName="cost" />
+              </div>
+              <div class="col-auto">
+                <small *ngIf="errorHandling('cost', 'required')" class="text-danger">
+                  El precio del videojuego es requerido
+                </small>
+                <small *ngIf="errorHandling('cost', 'pattern')" class="text-danger">
+                  El precio debe contener solo números
+                </small>
+              </div>
+            </div>
+
+
+
+            <div class="form-group row">
+              <label for="product_features" class="col-sm-4 col-form-label">Caracteristicas de productos </label>
+              <div class="col-sm-8">
+                <!--Array control genero-->
+                <div formArrayName="product_features">
+                  <!--Nombre del control con el indice y valor obtenido de la lista de generos-->
+                  <!--Cada vez que cambia o se selecciona, debe actualizar el array que guarda los id de genero-->
+                  <div class="form-check" *ngFor="let p of product_features.controls; index as i">
+                    <input type="checkbox" class="form-check-input" [formControlName]="i" [value]="generosList[i]?.id"
+                      (change)="onCheckChange(generosList[i]?.id, $event)" />
+                    <label class="form-check-label">{{generosList[i]?.description}}</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label" for="is_enabled">Habilitar producto </label>
+              <div class="col-sm-8">
+                <select class="form-control" formControlName="is_enabled">
+                  <option value=1>Si</option>
+                  <option value=0>No</option>
+                </select>
+              </div>
+              <div class="col-auto">
+                <small *ngIf="errorHandling('is_enabled', 'required')" class="text-danger">
+                  Es requerido seleccionar el estado
+                </small>
+              </div>
+            </div>
+
+
+            <!-- Falta enviar productclassification y productbrand. Se debe aplicar la misma logica de roles-->
+            <div class="form-group">
+              <label for="productclassification">Clasificación de producto</label>
+              <select class="form-control" formControlName="productclassification_id">
+                <option *ngFor="let x of productclassification" [value]="x.id">
+                  {{x.description}}
+                </option>
+              </select>
+              <div class="col-sm-4">
+                <small *ngIf="errorHandling('productclassification_id', 'required')" class="text-danger">
+                  La clasificación del producto es requerida
+                </small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="productbrand">Marca de producto</label>
+              <select class="form-control" formControlName="productbrand_id">
+                <option *ngFor="let x of productbrand" [value]="x.id">
+                  {{x.description}}
+                </option>
+              </select>
+              <div class="col-sm-4">
+                <small *ngIf="errorHandling('productbrand_id', 'required')" class="text-danger">
+                  La marca del producto es requerida
+                </small>
+              </div>
+            </div>
+
+
+
+            <div class="col-md-6 mb-3">
+              <div class="btn-group" role="group">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" (click)="onBack()">
+                  Regresar
+                </button>
+              </div>
+            </div>
+
+
+          </div>
+
+
+          <!--Imagen-->
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label for="image" class="col-sm-4 col-form-label">Imagen </label>
+              <div class="col-sm-8">
+                <input type="file" class="formControl" name="image" (change)="onFileSelect($event)" />
+              </div>
+              <div class="card" style="width: 18rem;" *ngIf="imageURL && imageURL !== ''">
+                <img [src]="imageURL" [alt]="formUpdate.get('nombre').value" class="img-fluid card-img-top">
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </form>
+    </ng-template>
+
+  </div>
+</div>

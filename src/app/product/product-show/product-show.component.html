@@ -1,4 +1,9 @@
 <div class="container margen">
+  <ng-template #loading>
+    <img class="img-fluid rounded mx-auto d-block" src="/assets/images/loading.gif" alt="Cargando..."
+      style="width: 300px;" />
+  </ng-template>
+  <ng-template [ngIf]="datos" [ngIfElse]="loading"></ng-template>
   <div class="row my-4">
     <div class="col" *ngIf="datos?.id">
       <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-6 shadow-sm h-md-250 ">

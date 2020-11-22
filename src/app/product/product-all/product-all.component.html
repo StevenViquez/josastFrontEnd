@@ -14,6 +14,11 @@
           <th scope="col">Acciones</th>
         </tr>
       </thead>
+      <ng-template #loading>
+        <img class="img-fluid rounded mx-auto d-block" src="/assets/images/loading.gif" alt="Cargando..."
+          style="width: 300px;" />
+      </ng-template>
+      <ng-template [ngIf]="datos" [ngIfElse]="loading"></ng-template>
       <tbody>
         <tr *ngFor="let item of datos">
           <td>{{item.name}}</td>
@@ -23,9 +28,17 @@
              <input type="image" src="{{item.url_picture}}" id="ImagenProducto" style="height:75px;width:75px">
           </td>
           <td>
-            <button type="button" class="btn btn-primary btn-sm" (click)="updateProduct(item.id)">
-              <i class="fas fa-pencil-alt"></i>
+
+            <div class="btn-group-vertical">
+              <button type="button" class="btn btn-success btn-sm" (click)="updateProduct(item.id)">
+                <i class="fas fa-pencil-alt"></i>
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" (click)="showProduct(item.id)">
+              <i class="fas fa-info"></i>
             </button>
+          </div>
+
+
           </td>
         </tr>
       </tbody>

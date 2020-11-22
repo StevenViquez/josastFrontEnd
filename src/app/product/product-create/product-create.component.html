@@ -57,13 +57,20 @@
             <div class="form-group row">
               <label for="product_features" class="col-sm-4 col-form-label">Caracteristicas de productos </label>
               <div class="col-sm-8">
+                <ng-template #loading>
+                  <img class="img-fluid rounded mx-auto d-block" src="/assets/images/loading.gif" alt="Cargando.."
+                    style="width: 300px;" />
+                </ng-template>
+                <ng-template [ngIf]="generosList" [ngIfElse]="loading"></ng-template>
                 <!--Array control genero-->
                 <div formArrayName="product_features">
                   <!--Nombre del control con el indice y valor obtenido de la lista de generos-->
                   <!--Cada vez que cambia o se selecciona, debe actualizar el array que guarda los id de genero-->
+
                   <div class="form-check" *ngFor="let p of product_features.controls; index as i">
                     <input type="checkbox" class="form-check-input" [formControlName]="i" [value]="generosList[i]?.id"
                       (change)="onCheckChange(generosList[i]?.id, $event)" />
+
                     <label class="form-check-label">{{generosList[i]?.description}}</label>
                   </div>
                 </div>
@@ -121,11 +128,8 @@
 
             <div class="col-md-6 mb-3">
               <div class="btn-group" role="group">
-                <button type="submit" class="btn btn-success">Guardar</button>
-                <button type="reset" class="btn btn-secondary" (click)="onReset()">
-                  Cancelar
-                </button>
-                <button type="button" class="btn btn-info" (click)="onBack()">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" (click)="onBack()">
                   Regresar
                 </button>
               </div>

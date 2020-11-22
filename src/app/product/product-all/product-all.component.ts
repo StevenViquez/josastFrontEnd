@@ -47,6 +47,12 @@ export class ProductAllComponent implements OnInit {
     });
   }
 
+  showProduct(id: number) {
+    this.router.navigate(['../', id], {
+      relativeTo: this.route,
+    });
+  }
+
 }
 
 
