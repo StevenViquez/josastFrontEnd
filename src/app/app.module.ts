@@ -11,6 +11,7 @@ import { UserModule } from './user/user.module';
 import { HttpErrorInterceptorService } from './share/http-error-interceptor.service';
 import { ProductModule } from './product/product.module';
 import { EmployeeModule } from './employee/employee.module';
+import { OrderModule } from './order/order.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { EmployeeModule } from './employee/employee.module';
     EmployeeModule,
     // al final el gestor de las rutas principal
     AppRoutingModule,
+    OrderModule,
   ],
   providers: [
     {
