@@ -7,13 +7,15 @@ import { EmployeeIndexComponent } from './employee-index/employee-index.componen
 import { EmployeeShowComponent } from './employee-show/employee-show.component';
 import { EmployeeCreateComponent } from './employee-create/employee-create.component';
 import { EmployeeUpdateComponent } from './employee-update/employee-update.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [EmployeeAllComponent, EmployeeIndexComponent, EmployeeShowComponent, EmployeeCreateComponent, EmployeeUpdateComponent],
   imports: [
     CommonModule,
-    EmployeeRoutingModule
+    EmployeeRoutingModule,
+    ReactiveFormsModule,
   ]
 })
 export class EmployeeModule { }

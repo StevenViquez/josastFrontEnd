@@ -34,4 +34,24 @@ export class EmployeeAllComponent implements OnInit {
     // Desinscribirse
     this.destroy$.unsubscribe();
   }
+
+  createEmployee() {
+    this.router.navigate(['../create'], {
+      relativeTo: this.route,
+    });
+  }
+
+  updateEmployee(id: number) {
+    this.router.navigate(['../update', id], {
+      relativeTo: this.route,
+    });
+  }
+
+  showEmployee(id: number) {
+    this.router.navigate(['../', id], {
+      relativeTo: this.route,
+    });
+  }
+
+
 }

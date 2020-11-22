@@ -1,7 +1,7 @@
 <div class="row justify-content-center margen">
   <div class="col-md-10">
     <h4 class="mb-3">Lista de empleados</h4>
-    <button type="button" class="btn btn-primary btn-sm">
+    <button type="button" class="btn btn-primary btn-sm" (click)="createEmployee()">
       <i class="fas fa-plus"></i>
     </button>
     <table class="table table-hover">
@@ -15,6 +15,11 @@
           <th scope="col">Acciones</th>
         </tr>
       </thead>
+      <ng-template #loading>
+        <img class="img-fluid rounded mx-auto d-block" src="/assets/images/loading.gif" alt="Cargando..."
+          style="width: 300px;" />
+      </ng-template>
+      <ng-template [ngIf]="datos" [ngIfElse]="loading"></ng-template>
       <tbody>
         <tr *ngFor="let item of datos">
           <td>{{item.name}}</td>
@@ -23,9 +28,14 @@
           <td>{{item.employeeposition.description}} </td>
           <td>{{item.vehicle.vehiclebrand.description}} - {{item.vehicle.year}}</td>
           <td>
-            <button type="button" class="btn btn-primary btn-sm">
-              <i class="fas fa-pencil-alt"></i>
-            </button>
+            <div class="btn-group-vertical">
+              <button type="button" class="btn btn-success btn-sm" (click)="updateEmployee(item.id)">
+                <i class="fas fa-pencil-alt"></i>
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" (click)="showEmployee(item.id)">
+                <i class="fas fa-info"></i>
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>
