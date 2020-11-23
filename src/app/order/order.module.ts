@@ -7,12 +7,15 @@ import { OrderCreateComponent } from './order-create/order-create.component';
 import { OrderIndexComponent } from './order-index/order-index.component';
 import { OrderShowComponent } from './order-show/order-show.component';
 import { OrderUpdateComponent } from './order-update/order-update.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [OrderAllComponent, OrderCreateComponent, OrderIndexComponent, OrderShowComponent, OrderUpdateComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     OrderRoutingModule
   ]
 })

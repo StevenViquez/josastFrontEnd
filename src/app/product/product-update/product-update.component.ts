@@ -21,7 +21,7 @@ import { takeUntil } from 'rxjs/operators';
 export class ProductUpdateComponent implements OnInit {
   product: any;
   productclassification: any;
-  productbrand:any;
+  productbrand: any;
   imageURL: string;
   generosList: any;
   formUpdate: FormGroup;
@@ -48,8 +48,9 @@ export class ProductUpdateComponent implements OnInit {
   }
 
 
+
   reactiveForm() {
-    this.getGeneros();
+
     //
     //Si hay información del videojuego
     if (this.product) {
@@ -77,15 +78,17 @@ export class ProductUpdateComponent implements OnInit {
       });
       // Vista previa imagen
       this.imageURL = this.product.url_picture;
-      //this.getproductclassification();
-      //this.getproductbrand();
+      this.getGeneros();
+      this.getproductbrand();
     }
   }
 
 
 
 
-  ngOnInit(): void {}
+
+ ngOnInit(): void {}
+
 
 
   getGeneros() {
@@ -96,9 +99,13 @@ export class ProductUpdateComponent implements OnInit {
       });
   }
 
+
+
   get product_features(): FormArray {
     return this.formUpdate.get('product_features') as FormArray;
   }
+
+
 
   get product_feature_id(): FormArray {
     return this.formUpdate.get('product_feature_id') as FormArray;
@@ -106,16 +113,19 @@ export class ProductUpdateComponent implements OnInit {
 
 
 
+
+
   private checkboxgeneros() {
     //Recorrer la lista de generos y especificar si esta seleccionado
     this.generosList.forEach((o) => {
       let selected = false;
-      if (this.product.product_features.find((x) => x.id == o.id)) {
+      if (this.product.productfeatures.find((x) => x.id == o.id)) {
         selected = true;
       }
       const control = new FormControl(selected);
       (this.formUpdate.controls.product_features as FormArray).push(control);
       if (selected) {
+        console.log('entro aca');
         //Agregar al array de id seleccionados
         (this.formUpdate.controls.product_feature_id as FormArray).push(
           new FormControl(o.id)
@@ -123,6 +133,8 @@ export class ProductUpdateComponent implements OnInit {
       }
     });
   }
+
+
 
 
   onCheckChange(idCheck, event) {
@@ -148,6 +160,7 @@ export class ProductUpdateComponent implements OnInit {
       });
     }
   }
+
 
 
 

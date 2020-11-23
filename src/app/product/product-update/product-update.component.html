@@ -61,17 +61,17 @@
 
 
 
+            
             <div class="form-group row">
-              <label for="product_features" class="col-sm-4 col-form-label">Caracteristicas de productos </label>
+              <label for="product_features" class="col-sm-4 col-form-label">Caracteristicas del producto </label>
               <div class="col-sm-8">
-                <!--Array control genero-->
-                <div formArrayName="product_features">
-                  <!--Nombre del control con el indice y valor obtenido de la lista de generos-->
-                  <!--Cada vez que cambia o se selecciona, debe actualizar el array que guarda los id de genero-->
+                <div formArrayName="product_features" name="product_features">
                   <div class="form-check" *ngFor="let p of product_features.controls; index as i">
                     <input type="checkbox" class="form-check-input" [formControlName]="i" [value]="generosList[i]?.id"
                       (change)="onCheckChange(generosList[i]?.id, $event)" />
-                    <label class="form-check-label">{{generosList[i]?.description}}</label>
+                    <label class="form-check-label">{{
+                                  generosList[i]?.description
+                                }}</label>
                   </div>
                 </div>
               </div>

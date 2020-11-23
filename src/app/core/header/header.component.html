@@ -74,6 +74,11 @@
 
       <ul class="navbar-nav ml-auto ml-md-0">
 
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/order" routerLinkActive="active" class="nav-link"><i
+              class="fas fa-shopping-cart btn-primary"></i> <span class="badge badge-light">{{qtyItems}}</span> </a>
+        </li>
+
         <li class="nav-item dropdown" ngbDropdown placement="bottom-right" display="dynamic">
           <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
             aria-expanded="false">

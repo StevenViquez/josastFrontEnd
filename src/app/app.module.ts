@@ -32,9 +32,10 @@ import { OrderModule } from './order/order.module';
     UserModule,
     ProductModule,
     EmployeeModule,
+    OrderModule,
     // al final el gestor de las rutas principal
     AppRoutingModule,
-    OrderModule,
+
   ],
   providers: [
     {
