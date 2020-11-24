@@ -36,6 +36,9 @@ export class ProductUpdateComponent implements OnInit {
   ) {
     //Desde el constructor obtener el identificar de la ruta
     const id = +this.route.snapshot.paramMap.get('id');
+    this.getproductbrand();
+    this.getproductclassification();
+    this.getGeneros();
     this.getVideojuego(id);
   }
   getVideojuego(id: number) {
@@ -50,8 +53,6 @@ export class ProductUpdateComponent implements OnInit {
 
 
   reactiveForm() {
-
-    //
     //Si hay información del videojuego
     if (this.product) {
       //let fecha = formatDate(
@@ -70,16 +71,15 @@ export class ProductUpdateComponent implements OnInit {
           [Validators.required, Validators.pattern('[0-9]+')],
         ],
         is_enabled: [this.product.is_enabled, [Validators.required]],
-        productclassification_id: [this.product.productclassification_id, [Validators.required]],
-        productbrand_id: [this.product.productbrand_id, [Validators.required]],
+        productclassification_id: [this.product.productclassification.id, [Validators.required]],
+        productbrand_id: [this.product.productbrand.id, [Validators.required]],
         image: [''],
         product_features: this.fb.array([]),
         product_feature_id: this.fb.array([]),
       });
       // Vista previa imagen
       this.imageURL = this.product.url_picture;
-      this.getGeneros();
-      this.getproductbrand();
+
     }
   }
 
@@ -120,6 +120,8 @@ export class ProductUpdateComponent implements OnInit {
     this.generosList.forEach((o) => {
       let selected = false;
       if (this.product.productfeatures.find((x) => x.id == o.id)) {
+        console.log('entro aca myfriend!!!');
+        console.log(this.product.productfeatures.id);
         selected = true;
       }
       const control = new FormControl(selected);
@@ -213,6 +215,7 @@ export class ProductUpdateComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.productclassification = data;
+        console.log(this.productclassification)
       });
   }
 
@@ -222,6 +225,8 @@ export class ProductUpdateComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.productbrand = data;
+        console.log(this.productbrand);
+        console.log(this.product);
       });
   }
 

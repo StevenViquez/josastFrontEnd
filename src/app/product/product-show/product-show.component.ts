@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CartService } from 'src/app/share/cart.service';
 import { GenericService } from 'src/app/share/generic.service';
+import { NotificacionService } from 'src/app/share/notification.service';
 
 @Component({
   selector: 'app-product-show',
@@ -12,9 +14,12 @@ import { GenericService } from 'src/app/share/generic.service';
 export class ProductShowComponent implements OnInit {
   datos: any;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  infoVideojuego: any;
   constructor(
     private gService: GenericService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private notificacion: NotificacionService,
+    private cartService: CartService,
   ) { }
 
   ngOnInit(): void {
@@ -37,5 +42,22 @@ export class ProductShowComponent implements OnInit {
     // Desinscribirse
     this.destroy$.unsubscribe();
   }
+
+  agregarProducto(id: number) {
+    this.gService
+      .get('product', id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        // console.log(data);
+        this.infoVideojuego = data;
+        this.cartService.addToCart(this.infoVideojuego);
+        this.notificacion.mensaje(
+          'Orden',
+          'Producto agregado a la orden',
+          'success'
+        );
+      });
+  }
+
 }
 

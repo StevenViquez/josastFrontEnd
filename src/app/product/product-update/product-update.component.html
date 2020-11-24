@@ -61,7 +61,7 @@
 
 
 
-            
+
             <div class="form-group row">
               <label for="product_features" class="col-sm-4 col-form-label">Caracteristicas del producto </label>
               <div class="col-sm-8">
@@ -96,7 +96,7 @@
 
             <!-- Falta enviar productclassification y productbrand. Se debe aplicar la misma logica de roles-->
             <div class="form-group">
-              <label for="productclassification">Clasificación de producto</label>
+              <label for="productclassification_id">Clasificación de producto</label>
               <select class="form-control" formControlName="productclassification_id">
                 <option *ngFor="let x of productclassification" [value]="x.id">
                   {{x.description}}
