@@ -69,9 +69,7 @@
                   <div class="form-check" *ngFor="let p of product_features.controls; index as i">
                     <input type="checkbox" class="form-check-input" [formControlName]="i" [value]="generosList[i]?.id"
                       (change)="onCheckChange(generosList[i]?.id, $event)" />
-                    <label class="form-check-label">{{
-                                  generosList[i]?.description
-                                }}</label>
+                    <label class="form-check-label">{{generosList[i]?.description }}</label>
                   </div>
                 </div>
               </div>

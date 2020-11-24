@@ -38,7 +38,6 @@ export class ProductUpdateComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.getproductbrand();
     this.getproductclassification();
-    this.getGeneros();
     this.getVideojuego(id);
   }
   getVideojuego(id: number) {
@@ -53,6 +52,7 @@ export class ProductUpdateComponent implements OnInit {
 
 
   reactiveForm() {
+    this.getGeneros();
     //Si hay información del videojuego
     if (this.product) {
       //let fecha = formatDate(
@@ -226,7 +226,6 @@ export class ProductUpdateComponent implements OnInit {
       .subscribe((data: any) => {
         this.productbrand = data;
         console.log(this.productbrand);
-        console.log(this.product);
       });
   }
 
