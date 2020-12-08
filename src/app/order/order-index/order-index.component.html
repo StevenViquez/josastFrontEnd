@@ -1,59 +1,72 @@
 <div class="container" id="main">
   <div class="row card">
-    <div class="card-header">Orden</div>
+    <div class="card-header">Orden JOSAST-ONLINE</div>
+
     <div class="card-body">
-      <div class="col">
-        <p class="card-text">Fecha: {{fecha | date:'dd/MM/yyyy'}}</p>
+      <div class="container">
+        <div class="row">
+
+          <div class="col p-4 d-flex flex-column position-static">
+          <img
+            src="/assets/images/logo.png"
+            
+            class="img-thumbnail rounded float-left"
+          />
+
+        </div>
+
+
+        </div>
       </div>
 
     </div>
-
   </div>
-  <div class=" row card">
+  <div class="row card">
     <div class="card-header">Detalle Orden</div>
     <div class="card-body">
       <table class="table table-bordered table-hover">
         <thead>
           <tr>
-            <th>
-              Producto
-            </th>
-            <th class="right">
-              Precio
-            </th>
-            <th class="center">
-              Cantidad
-            </th>
-            <th class="right">
-              SubTotal
-            </th>
+            <th>Producto</th>
+            <th class="right">Precio</th>
+            <th class="center">Cantidad</th>
+            <th class="right">SubTotal</th>
             <th></th>
           </tr>
         </thead>
 
         <tbody>
-
-
-          <tr class="group" style="cursor: pointer" *ngFor="let item of items; let i = index">
+          <tr
+            class="group"
+            style="cursor: pointer"
+            *ngFor="let item of items; let i = index"
+          >
             <td>
-              <p>{{ item.product.name}}</p>
-
-
+              <p>{{ item.product.name }}</p>
             </td>
             <td class="right">
-              <p>${{item.product.cost}}</p>
+              <p>${{ item.product.cost }}</p>
             </td>
             <td class="center">
-              <input id="cantidad " type="number" class="form-control mb-2" [(ngModel)]="item.cantidad"
-                (change)=" actualizarCantidad(item)">
+              <input
+                id="cantidad "
+                type="number"
+                class="form-control mb-2"
+                [(ngModel)]="item.cantidad"
+                (change)="actualizarCantidad(item)"
+              />
             </td>
 
             <td class="right">
-              <p>${{ item.subtotal}}</p>
+              <p>${{ item.subtotal }}</p>
             </td>
             <td>
-              <button class="btn btn-primary btn-sm" (click)="eliminarItem(item)"><i
-                  class="far fa-trash-alt"></i></button>
+              <button
+                class="btn btn-primary btn-sm"
+                (click)="eliminarItem(item)"
+              >
+                <i class="far fa-trash-alt"></i>
+              </button>
             </td>
           </tr>
         </tbody>
@@ -62,6 +75,49 @@
         <div class="col-md-4">
           <table class="table table-bordered table-hover">
             <tbody>
+              <!--TAX-->
+              <tr>
+                <td class="left">
+                  <strong>Impuesto</strong>
+                </td>
+                <td class="right">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">$</div>
+                    </div>
+                    <input
+                      readonly
+                      type="text"
+                      class="form-control"
+                      id="tax"
+                      type="text"
+                      [value]="tax"
+                    />
+                  </div>
+                </td>
+              </tr>
+              <!--Delivery Fee-->
+              <tr>
+                <td class="left">
+                  <strong>Precio de envío</strong>
+                </td>
+                <td class="right">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">$</div>
+                    </div>
+                    <input
+                      readonly
+                      type="text"
+                      class="form-control"
+                      id="delivery_fee"
+                      type="text"
+                      [value]="delivery_fee"
+                    />
+                  </div>
+                </td>
+              </tr>
+              <!--Total-->
               <tr>
                 <td class="left">
                   <strong>Total</strong>
@@ -71,18 +127,29 @@
                     <div class="input-group-prepend">
                       <div class="input-group-text">$</div>
                     </div>
-                    <input readonly type="text" class="form-control" id="total" type="text" [value]="total">
+                    <input
+                      readonly
+                      type="text"
+                      class="form-control"
+                      id="total"
+                      type="text"
+                      [value]="billTotal"
+                    />
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
           <div class="col">
-            <button class="btn btn-success mb-2 float-right" (click)="ordenar()">Ordenar</button>
+            <button
+              class="btn btn-success mb-2 float-right"
+              (click)="ordenar()"
+            >
+              Siguiente
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-

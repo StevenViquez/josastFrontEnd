@@ -8,10 +8,11 @@ import { OrderIndexComponent } from './order-index/order-index.component';
 import { OrderShowComponent } from './order-show/order-show.component';
 import { OrderUpdateComponent } from './order-update/order-update.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OrderCompleteComponent } from './order-complete/order-complete.component';
 
 
 @NgModule({
-  declarations: [OrderAllComponent, OrderCreateComponent, OrderIndexComponent, OrderShowComponent, OrderUpdateComponent],
+  declarations: [OrderAllComponent, OrderCreateComponent, OrderIndexComponent, OrderShowComponent, OrderUpdateComponent, OrderCompleteComponent],
   imports: [
     CommonModule,
     FormsModule,

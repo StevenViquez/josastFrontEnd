@@ -1,1 +1,98 @@
-<p>order-show works!</p>
+<div class="container margen">
+  <ng-template #loading>
+    <img class="img-fluid rounded mx-auto d-block" src="/assets/images/loading.gif" alt="Cargando..."
+      style="width: 300px;" />
+  </ng-template>
+  <ng-template [ngIf]="datos" [ngIfElse]="loading"></ng-template>
+  <div class="row my-4">
+    <div class="col" *ngIf="datos?.id">
+      <div
+        class="row no-gutters border rounded overflow-hidden flex-md-row mb-6 shadow-sm h-md-250"
+      >
+        <div class="col p-4 d-flex flex-column position-static">
+          <!--Codigo aca de informacion-->
+
+           <h3 class="mb-0 text-primary">
+            Número de factura: {{ datos.id }}
+          </h3>
+          <div class="mb-1">
+            <b>Cliente: </b> {{datos.order.customer.name}} {{datos.order.customer.second_name}}
+          </div>
+          <div class="mb-1">
+            <b>Dirección: </b> {{datos.order.customer.address}}
+          </div>
+          <p class="card-text">
+            <b>Repartidor: </b>{{datos.order.employee.name}} {{datos.order.employee.second_name}}
+          </p>
+          <div class="card-text">
+            <b>Información de la orden: </b>
+            <ul class="list-group">
+              <li class="list-group-item"> Costo de envío: {{ datos.order.delivery_fee }}</li>
+              <li class="list-group-item">Subtotal: {{ datos.order.subtotal }}</li>
+              <li class="list-group-item">IVA: {{ datos.order.tax }}</li>
+              <li class="list-group-item">Total: {{ datos.order.total }}</li>
+            </ul>
+          </div>
+
+
+
+        </div>
+        <div class="fixed-bottom">
+          <a class="btn btn-outline-warning" href="order/all" role="button"><b><< Ver Ordenes</b></a>
+        </div>
+
+        <div class="col p-4 d-flex flex-column position-static">
+
+          <!--Codigo aca de productos-->
+          <div class="mb-1">
+            <b>Facturado en: </b> {{datos.date_of_issue | date}}
+          </div>
+
+           <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Foto Producto</th>
+        </tr>
+      </thead>
+      <ng-template #loading>
+        <img class="img-fluid rounded mx-auto d-block" src="/assets/images/loading.gif" alt="Cargando..."
+          style="width: 300px;" />
+      </ng-template>
+      <ng-template [ngIf]="datos" [ngIfElse]="loading"></ng-template>
+      <tbody>
+        <tr *ngFor="let item of datos.order.products">
+          <td>{{item.name}}</td>
+          <td>{{item.pivot.quantity}}</td>
+          <td>₡{{item.cost}}</td>
+          <td>
+             <input type="image" src="{{item.url_picture}}" id="ImagenProducto" style="height:75px;width:75px">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

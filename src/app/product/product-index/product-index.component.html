@@ -1,1 +1,28 @@
-<p>product-index works!</p>
+<div class="row justify-content-center margen">
+  <div class="col-md-10">
+    <ng-template #loading>
+      <img
+        class="img-fluid rounded mx-auto d-block"
+        src="/assets/images/loading.gif"
+        alt="Cargando..."
+        style="width: 300px"
+      />
+    </ng-template>
+    <ng-template [ngIf]="datos" [ngIfElse]="loading"></ng-template>
+
+    <div class="row card-group">
+      <div class="col-4" *ngFor="let item of datos">
+        <div class="card">
+          <div class="card-block">
+            <h3 class="card-title">{{item.name}} - ₡{{item.cost}}</h3>
+             <img class="card-img-top" src="{{item.url_picture}}" style="height:300px;width:350px" alt="Card image cap">
+            <p class="card-text">
+              {{item.description}}
+            </p>
+              <button class="btn btn-warning" (click)="agregarProducto(item.id)"><i class="fas fa-cart-plus"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

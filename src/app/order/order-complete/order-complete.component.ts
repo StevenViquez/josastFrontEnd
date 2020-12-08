@@ -14,15 +14,15 @@ import { formatDate } from '@angular/common';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-employee-update',
-  templateUrl: './employee-update.component.html',
-  styleUrls: ['./employee-update.component.css']
+  selector: 'app-order-complete',
+  templateUrl: './order-complete.component.html',
+  styleUrls: ['./order-complete.component.css']
 })
-export class EmployeeUpdateComponent implements OnInit {
+export class OrderCompleteComponent implements OnInit {
 
+  order: any;
   employee: any;
-  employeeposition: any;
-  vehicle: any;
+  customer: any;
   formUpdate: FormGroup;
   destroy$: Subject<boolean> = new Subject<boolean>();
   makeSubmit: boolean = false;
@@ -35,14 +35,15 @@ export class EmployeeUpdateComponent implements OnInit {
   ) {
     //Desde el constructor obtener el identificar de la ruta
     const id = +this.route.snapshot.paramMap.get('id');
-    this.getvehicle();
-    this.getemployeeposition();
+    this.getcustomer();
+    this.getemployee();
     this.getVideojuego(id);
   }
   getVideojuego(id: number) {
-    this.gService.get('employee', id).subscribe((respuesta: any) => {
-      this.employee = respuesta;
-      //Obtenida la información del videojuego
+    this.gService.get('order', id).subscribe((respuesta: any) => {
+      this.order = respuesta;
+      console.log(this.order);
+       //Obtenida la información del videojuego
       //se construye el formulario
       this.reactiveForm();
     });
@@ -52,29 +53,15 @@ export class EmployeeUpdateComponent implements OnInit {
 
   reactiveForm() {
     //Si hay información del videojuego
-    if (this.employee) {
-      let hired_date = formatDate(
-        this.employee.hired_date,
-        'yyyy-MM-dd',
-          'en-US'
-     );
-     console.log(hired_date);
+    if (this.order) {
+
       //Cargar la información del videojuego
       //en los controles que conforman el formulario
       this.formUpdate = this.fb.group({
-        id: [this.employee.id, [Validators.required]],
-        name: [this.employee.name, [Validators.required]],
-        second_name: [this.employee.second_name, [Validators.required]],
-        email: [this.employee.email, [Validators.required]],
-        phone_number: [this.employee.phone_number, [Validators.required]],
-        salary: [
-          this.employee.salary,
-          [Validators.required, Validators.pattern('[0-9]+')],
-        ],
-        hired_date: [hired_date, [Validators.required]],
-        is_enabled: [this.employee.is_enabled, [Validators.required]],
-        vehicle_id: [this.employee.vehicle.id, [Validators.required]],
-        employeeposition_id: [this.employee.employeeposition.id, [Validators.required]],
+        id: [this.order.id, [Validators.required]],
+       need_delivery: [null, [Validators.required]],
+       employee_id: [null, [Validators.required]],
+       customer_id: [null, [Validators.required]],
       });
     }
   }
@@ -92,10 +79,15 @@ export class EmployeeUpdateComponent implements OnInit {
     formData = this.gService.toFormData(this.formUpdate.value);
     formData.append('_method', 'PATCH');
     this.gService
-      .update_formdata('employee', formData)
+      .update_formdata('order/complete-order', formData)
       .subscribe((respuesta: any) => {
-        this.employee = respuesta;
-        this.router.navigate(['/employee/all'], {
+        this.order = respuesta;
+        this.notificacion.mensaje(
+          'Orden',
+          'Orden registrada satisfactoriamente',
+          'success'
+        );
+        this.router.navigate(['/order/all'], {
           queryParams: { update: 'true' },
         });
       });
@@ -104,7 +96,7 @@ export class EmployeeUpdateComponent implements OnInit {
     this.formUpdate.reset();
   }
   onBack() {
-    this.router.navigate(['/employee/all']);
+    this.router.navigate(['/order/all']);
   }
   public errorHandling = (control: string, error: string) => {
     return (
@@ -114,24 +106,25 @@ export class EmployeeUpdateComponent implements OnInit {
     );
   };
 
-  getvehicle() {
+  getcustomer() {
     this.gService
-      .list('vehicle')
+      .list('customer')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-        this.vehicle = data;
-        console.log(this.vehicle)
+        this.customer = data;
+        console.log(this.customer)
       });
   }
 
-  getemployeeposition() {
+  getemployee() {
     this.gService
-      .list('employee-position')
+      .list('employee/vendedores')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-        this.employeeposition = data;
-        console.log(this.employeeposition);
+        this.employee = data;
+        console.log(this.employee);
       });
   }
 
 }
+

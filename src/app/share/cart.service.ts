@@ -6,6 +6,9 @@ export class ItemCart {
   cantidad: number;
   precio: number;
   subtotal: number;
+  //tax: number;
+  //billTotal: number;
+  //delivery_fee: number;
 }
 @Injectable({
   providedIn: 'root',
@@ -29,8 +32,10 @@ export class CartService {
     newItem.precio = producto.precio | producto.cost;
     newItem.cantidad = 1;
     newItem.subtotal = this.calculoSubtotal(newItem);
-    console.log(newItem.subtotal);
     newItem.product = producto;
+    //newItem.tax = this.getTax();
+    //newItem.billTotal = this.getBillTotal();
+   // newItem.delivery_fee = this.getDeliveryFee();
     //Obtenemos el valor actual
     let listCart = this.cart.getValue();
     //Si no es el primer item del carrito
@@ -103,13 +108,29 @@ export class CartService {
     if (listCart != null) {
       listCart.forEach((item: ItemCart, index) => {
         total += item.subtotal;
-        console.log(total);
-        console.log(item.subtotal);
       });
     }
-
     return total;
   }
+
+ public getTax(): number {
+    return this.getTotal() * 0.13;
+  }
+
+//On this method we add TAX, Subtotal and Delivery fee.
+public getBillTotal(): number {
+    return this.getTotal() + this.getTax() + this.getDeliveryFee();
+}
+//On this method I get the total of items and compare whether it is null or not
+public getDeliveryFee(): number {
+    let deliveryFee = 0;
+    console.log(this.cart.getValue().length);
+    if (this.cart.getValue().length > 0) {
+      deliveryFee = 800;
+    }
+    return deliveryFee;
+}
+
   public deleteCart() {
     this.cart.next(null); //Enviamos el valor al Observable
     this.qtyItems.next(0);

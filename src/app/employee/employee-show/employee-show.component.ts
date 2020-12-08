@@ -30,6 +30,7 @@ export class EmployeeShowComponent implements OnInit {
       .subscribe((data: any) => {
         // console.log(data);
         this.datos = data;
+        console.log(this.datos);
       });
   }
   ngOnDestroy() {

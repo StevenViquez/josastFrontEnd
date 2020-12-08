@@ -23,12 +23,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link text-white" href="#"
+        <a class="nav-link text-white" href="/order/all"
           >Ver ordernes <span class="sr-only">(current)</span></a
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white" href="#">Realizar Orden</a>
+        <a class="nav-link text-white" href="/product/index">Agregar productos</a>
       </li>
       <li class="nav-item dropdown">
         <a
@@ -45,7 +45,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/employee/all">Empleados</a>
           <a class="dropdown-item" href="/product/all">Productos</a>
-          <a class="dropdown-item" href="#">Ordenes</a>
+          <a class="dropdown-item" href="/order/all">Ordenes</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Reportes</a>
         </div>
@@ -72,34 +72,52 @@
     </form>
   </div>
 
-      <ul class="navbar-nav ml-auto ml-md-0">
+  <ul class="navbar-nav ml-auto ml-md-0">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        routerLink="/order"
+        routerLinkActive="active"
+        class="nav-link"
+        ><i class="fas fa-shopping-cart btn-primary"></i>
+        <span class="badge badge-light">{{ qtyItems }}</span>
+      </a>
+    </li>
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/order" routerLinkActive="active" class="nav-link"><i
-              class="fas fa-shopping-cart btn-primary"></i> <span class="badge badge-light">{{qtyItems}}</span> </a>
-        </li>
-
-        <li class="nav-item dropdown" ngbDropdown placement="bottom-right" display="dynamic">
-          <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">
-            <span>
-              <i class="fas fa-user"></i>
-              <i *ngIf="isAutenticated"> {{currentUser.user.email}}</i>
-            </span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-item" *ngIf="isAutenticated" >
-              <div class="form-group">{{currentUser.user.name}}</div>
-            </div>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" [routerLink]="['usuario/login']"*ngIf="!(isAutenticated)"><i
-                class="fas fa-user"></i> Login</a>
-            <a class="dropdown-item" (click)="logout()" *ngIf="isAutenticated"><i class="fas fa-sign-out-alt"></i>
-              Logout</a>
-          </div>
-        </li>
-      </ul>
-
-
-
+    <li
+      class="nav-item dropdown"
+      ngbDropdown
+      placement="bottom-right"
+      display="dynamic"
+    >
+      <a
+        class="btn btn-primary dropdown-toggle"
+        data-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <span>
+          <i class="fas fa-user"></i>
+          <i *ngIf="isAutenticated"> {{ currentUser.user.email }}</i>
+        </span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <div class="dropdown-item" *ngIf="isAutenticated">
+          <div class="form-group">{{ currentUser.user.name }}</div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <a
+          class="dropdown-item"
+          [routerLink]="['usuario/login']"
+          *ngIf="!isAutenticated"
+          ><i class="fas fa-user"></i> Login</a
+        >
+        <a class="dropdown-item" (click)="logout()" *ngIf="isAutenticated"
+          ><i class="fas fa-sign-out-alt"></i> Logout</a
+        >
+      </div>
+    </li>
+  </ul>
 </nav>

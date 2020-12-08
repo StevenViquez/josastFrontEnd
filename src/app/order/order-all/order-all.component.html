@@ -1,1 +1,51 @@
-<p>order-all works!</p>
+<div class="row justify-content-center margen">
+  <div class="col-md-10">
+    <h4 class="mb-3">Lista de ordenes</h4>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Número de orden</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">Repartidor</th>
+          <th scope="col">Total a pagar</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Facturar</th>
+        </tr>
+      </thead>
+      <ng-template #loading>
+        <img class="img-fluid rounded mx-auto d-block" src="/assets/images/loading.gif" alt="Cargando..."
+          style="width: 300px;" />
+      </ng-template>
+      <ng-template [ngIf]="datos" [ngIfElse]="loading"></ng-template>
+      <tbody>
+        <tr *ngFor="let item of datos">
+          <td>{{item.id}}</td>
+          <td>{{item.customer.name}} {{item.customer.second_name}} - {{item.customer.email}}</td>
+          <td>{{item.employee.name}} {{item.employee.second_name}} </td>
+          <td>₡{{item.total}} </td>
+          <td>
+              <select id="mydrop" (change)='onOptionsSelected($event,item.id)' name="status"  class="form-control" [(ngModel)]="item.statuses">
+                <option *ngFor="let x of estados" [value]="x.id">
+                  {{x.description}}
+                </option>
+              </select>
+
+          </td>
+          <td>
+
+            <div class="btn-group-vertical">
+              <button type="button" class="btn btn-success btn-sm" (click)="updateProduct(item.id)">
+                <i class="fas fa-pencil-alt"></i>
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" (click)="showProduct(item.id)">
+              <i class="fas fa-info"></i>
+            </button>
+          </div>
+
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
